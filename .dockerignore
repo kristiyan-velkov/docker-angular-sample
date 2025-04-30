@@ -1,0 +1,59 @@
+# =========================================
+# Dependency directories and build output
+# =========================================
+node_modules/
+dist/
+out-tsc/
+.tmp/
+.cache/
+.angular/
+
+# =========================================
+# Angular CLI, build tools, and test artifacts
+# =========================================
+coverage/
+.vite/
+.vitepress/
+jest/
+cypress/
+cypress/screenshots/
+cypress/videos/
+reports/
+playwright-report/
+
+# =========================================
+# Environment and log files
+# =========================================
+*.env*
+!.env.production
+*.log
+*.tsbuildinfo
+
+# =========================================
+# IDE and local development files
+# =========================================
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# =========================================
+# Version control
+# =========================================
+.git/
+.gitignore
+
+# =========================================
+# Docker-specific config files (not needed inside image)
+# =========================================
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# =========================================
+# Miscellaneous
+# =========================================
+*.bak
+*.old
+*.tmp
