@@ -1,4 +1,4 @@
-name: CI/CD Angular Application with Docker
+name: CI/CD – Angular App with Docker
 
 on:
   push:
@@ -8,85 +8,84 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  build-test-push:
-    name: Build, Test, and Push Docker Image
+  test:
+    name: Run Angular Jest Tests
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout source code
-      - name: Checkout source code
+      - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      # 2. Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # 3. Cache Docker layers
-      - name: Cache Docker layers
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
-
-      # 4. Cache npm dependencies
       - name: Cache npm dependencies
         uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+          restore-keys: ${{ runner.os }}-npm-
 
-      # 5. Extract metadata
-      - name: Extract metadata
-        id: meta
-        run: |
-          echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> "$GITHUB_OUTPUT"
-          echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
-
-      # 6. Build dev Docker image
       - name: Build Docker image for tests
         uses: docker/build-push-action@v6
         with:
           context: .
           file: Dockerfile.dev
-          tags: ${{ steps.meta.outputs.REPO_NAME }}-dev:latest
+          tags: angular-app-test:latest
           load: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
-      # 7. Run Angular tests with Jest
-      - name: Run Angular Jest tests inside container
+      - name: Run Jest tests in container
         run: |
           docker run --rm \
             --workdir /app \
             --entrypoint "" \
-            ${{ steps.meta.outputs.REPO_NAME }}-dev:latest \
+            angular-app-test:latest \
             sh -c "npm ci && npm run test -- --ci"
         env:
           CI: true
           NODE_ENV: test
         timeout-minutes: 5
 
-      # 8. Log in to Docker Hub
+  build-and-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-buildx-
+
+      - name: Extract metadata
+        id: meta
+        run: |
+          echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> "$GITHUB_OUTPUT"
+          echo "SHORT_SHA=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 9. Build and push production image
       - name: Build and push production image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: Dockerfile
           push: true
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:latest
             ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:${{ steps.meta.outputs.SHORT_SHA }}
