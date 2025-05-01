@@ -26,17 +26,18 @@ jobs:
           key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: ${{ runner.os }}-npm-
 
-      - name: Build Docker image for tests
+      - name: Build test image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: Dockerfile.dev
           tags: angular-app-test:latest
+          platforms: linux/amd64
           load: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
 
-      - name: Run Jest tests in container
+      - name: Run Jest tests inside container
         run: |
           docker run --rm \
             --workdir /app \
@@ -79,13 +80,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push production image
+      - name: Build and push multi-arch production image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: Dockerfile
           push: true
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:latest
             ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKERHUB_PROJECT_NAME }}:${{ steps.meta.outputs.SHORT_SHA }}
