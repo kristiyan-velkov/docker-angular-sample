@@ -1,59 +1,61 @@
-# =========================================
-# Dependency directories and build output
-# =========================================
-node_modules/
-dist/
-out-tsc/
-.tmp/
-.cache/
-.angular/
+# ================================
+# Node and build output
+# ================================
+node_modules
+dist
+out-tsc
+.angular
+.cache
+.tmp
 
-# =========================================
-# Angular CLI, build tools, and test artifacts
-# =========================================
-coverage/
-.vite/
-.vitepress/
-jest/
-cypress/
-cypress/screenshots/
-cypress/videos/
-reports/
-playwright-report/
+# ================================
+# Testing & Coverage
+# ================================
+coverage
+jest
+cypress
+cypress/screenshots
+cypress/videos
+reports
+playwright-report
+.vite
+.vitepress
 
-# =========================================
-# Environment and log files
-# =========================================
+# ================================
+# Environment & log files
+# ================================
 *.env*
-!.env.production
+!*.env.production
 *.log
 *.tsbuildinfo
 
-# =========================================
-# IDE and local development files
-# =========================================
-.vscode/
-.idea/
-*.swp
+# ================================
+# IDE & OS-specific files
+# ================================
+.vscode
+.idea
 .DS_Store
 Thumbs.db
+*.swp
 
-# =========================================
-# Version control
-# =========================================
-.git/
+# ================================
+# Version control & CI files
+# ================================
+.git
 .gitignore
 
-# =========================================
-# Docker-specific config files (not needed inside image)
-# =========================================
+# ================================
+# Docker & local orchestration
+# ================================
 Dockerfile
+Dockerfile.*
 .dockerignore
+docker-compose.yml
 docker-compose*.yml
 
-# =========================================
+# ================================
 # Miscellaneous
-# =========================================
+# ================================
 *.bak
 *.old
 *.tmp
