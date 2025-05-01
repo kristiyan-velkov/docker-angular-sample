@@ -1,4 +1,4 @@
-name: CI/CD â Angular Application with Docker
+name: CI/CD Angular Application with Docker
 
 on:
   push:
