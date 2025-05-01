@@ -18,3 +18,8 @@ services:
         - action: sync
           path: .
           target: /app
+  angular-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ["npm", "run", "test"]
