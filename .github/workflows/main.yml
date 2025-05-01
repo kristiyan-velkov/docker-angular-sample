@@ -66,7 +66,7 @@ jobs:
             --workdir /app \
             --entrypoint "" \
             ${{ steps.meta.outputs.REPO_NAME }}-dev:latest \
-            sh -c "npm ci && npm run test -- --ci --runInBand"
+            sh -c "npm ci && npm run test -- --ci"
         env:
           CI: true
           NODE_ENV: test
