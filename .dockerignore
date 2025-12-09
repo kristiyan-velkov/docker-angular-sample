@@ -37,6 +37,10 @@ playwright-report
 .DS_Store
 Thumbs.db
 *.swp
+.editorconfig
+.prettierrc
+.prettierignore
+.prettierignore
 
 # ================================
 # Version control & CI files

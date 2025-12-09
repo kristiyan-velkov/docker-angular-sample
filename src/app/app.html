@@ -27,9 +27,8 @@
 
     --pill-accent: var(--bright-blue);
 
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+      sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -42,19 +41,27 @@
     line-height: 100%;
     letter-spacing: -0.125rem;
     margin: 0;
-    font-family: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
-      "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+      Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: var(--gray-700);
+    font-weight: 400;
+    line-height: 140%;
+    margin: 1rem 0 0.5rem 0;
   }
 
   p {
     margin: 0;
     color: var(--gray-700);
+    line-height: 1.6;
   }
 
   main {
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,28 +72,55 @@
 
   .angular-logo {
     max-width: 9.2rem;
+    margin-bottom: 2rem;
   }
 
   .content {
     display: flex;
     justify-content: space-around;
     width: 100%;
-    max-width: 700px;
+    max-width: 900px;
     margin-bottom: 3rem;
+  }
+
+  .left-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    max-width: 400px;
+  }
+
+  .right-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    max-width: 400px;
   }
 
   .content h1 {
     margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .content h2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    font-weight: 500;
   }
 
   .content p {
     margin-top: 1.5rem;
+    font-size: 1rem;
   }
 
   .divider {
     width: 1px;
     background: var(--red-to-pink-to-purple-vertical-gradient);
-    margin-inline: 0.5rem;
+    margin-inline: 2rem;
+    min-height: 200px;
   }
 
   .pill-group {
@@ -95,6 +129,7 @@
     align-items: start;
     flex-wrap: wrap;
     gap: 1.25rem;
+    width: 100%;
   }
 
   .pill {
@@ -115,6 +150,7 @@
     line-height: 1.4rem;
     letter-spacing: -0.00875rem;
     text-decoration: none;
+    white-space: nowrap;
   }
 
   .pill:hover {
@@ -125,11 +161,14 @@
     --pill-accent: var(--bright-blue);
   }
   .pill-group .pill:nth-child(6n + 2) {
+    --pill-accent: var(--electric-violet);
+  }
+  .pill-group .pill:nth-child(6n + 3) {
     --pill-accent: var(--french-violet);
   }
-  .pill-group .pill:nth-child(6n + 3),
   .pill-group .pill:nth-child(6n + 4),
-  .pill-group .pill:nth-child(6n + 5) {
+  .pill-group .pill:nth-child(6n + 5),
+  .pill-group .pill:nth-child(6n + 6) {
     --pill-accent: var(--hot-red);
   }
 
@@ -153,10 +192,28 @@
     fill: var(--gray-900);
   }
 
+  .author-info {
+    margin-top: 1rem;
+  }
+
+  .author-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 0.5rem;
+  }
+
   @media screen and (max-width: 650px) {
     .content {
       flex-direction: column;
       width: max-content;
+    }
+
+    .left-side,
+    .right-side {
+      max-width: 100%;
+      align-items: center;
+      text-align: center;
     }
 
     .divider {
@@ -164,6 +221,17 @@
       width: 100%;
       background: var(--red-to-pink-to-purple-horizontal-gradient);
       margin-block: 1.5rem;
+      margin-inline: 0;
+      min-height: 1px;
+    }
+
+    .pill-group {
+      align-items: center;
+    }
+
+    .pill {
+      width: 100%;
+      justify-content: center;
     }
   }
 </style>
@@ -200,14 +268,7 @@
             <stop offset=".707" stop-color="#FF41F8" stop-opacity=".5" />
             <stop offset="1" stop-color="#FF41F8" stop-opacity="0" />
           </radialGradient>
-          <linearGradient
-            id="b"
-            x1="0"
-            x2="982"
-            y1="192"
-            y2="192"
-            gradientUnits="userSpaceOnUse"
-          >
+          <linearGradient id="b" x1="0" x2="982" y1="192" y2="192" gradientUnits="userSpaceOnUse">
             <stop stop-color="#F0060B" />
             <stop offset="0" stop-color="#F0070C" />
             <stop offset=".526" stop-color="#CC26D5" />
@@ -216,22 +277,81 @@
           <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
         </defs>
       </svg>
-      <h1>Docker Angular Sample Application</h1>
-      <p><b>Author</b>: Kristiyan Velkov</p>
-      <p>Congratulations! Your app is running. 🎉</p>
+      <h1>Hello, Angular!</h1>
+      <div class="author-info">
+        <div class="author-name">{{ name }}</div>
+        <p>Welcome to my Docker Angular Sample Application!</p>
+        <p>
+          This project demonstrates how to effectively containerize a modern Angular 21 application
+          using Docker for both development and production workflows.
+        </p>
+      </div>
+      <div class="social-links">
+        @for (link of socialLinks; track link.name) {
+        <a [href]="link.url" [aria-label]="link.name" target="_blank" rel="noopener">
+          @if (link.icon === 'linkedin') {
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+            />
+          </svg>
+          } @if (link.icon === 'github') {
+          <svg
+            width="25"
+            height="24"
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z"
+            />
+          </svg>
+          } @if (link.icon === 'medium') {
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"
+            />
+          </svg>
+          } @if (link.icon === 'newsletter') {
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+            />
+          </svg>
+          }
+        </a>
+        }
+      </div>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
       <div class="pill-group">
-        @for (item of [ { title: 'Explore the Docs', link: 'https://angular.dev'
-        }, { title: 'Learn with Tutorials', link:
-        'https://angular.dev/tutorials' }, { title: 'CLI Docs', link:
-        'https://angular.dev/tools/cli' }, { title: 'Angular Language Service',
-        link: 'https://angular.dev/tools/language-service' }, { title: 'Angular
-        DevTools', link: 'https://angular.dev/tools/devtools' }, ]; track
-        item.title) {
-        <a class="pill" [href]="item.link" target="_blank" rel="noopener">
-          <span>{{ item.title }}</span>
+        <a
+          class="pill"
+          href="https://docs.docker.com/guides/angular/"
+          target="_blank"
+          rel="noopener"
+        >
+          <span>Official Docker Angular Sample Guide</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="14"
@@ -244,65 +364,45 @@
             />
           </svg>
         </a>
-        }
-      </div>
-      <div class="social-links">
-        <a
-          href="https://github.com/angular/angular"
-          aria-label="Github"
-          target="_blank"
-          rel="noopener"
-        >
+        <a class="pill" href="https://angular.dev" target="_blank" rel="noopener">
+          <span>Explore the Docs</span>
           <svg
-            width="25"
-            height="24"
-            viewBox="0 0 25 24"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            alt="Github"
+            height="14"
+            viewBox="0 -960 960 960"
+            width="14"
+            fill="currentColor"
           >
             <path
-              d="M12.3047 0C5.50634 0 0 5.50942 0 12.3047C0 17.7423 3.52529 22.3535 8.41332 23.9787C9.02856 24.0946 9.25414 23.7142 9.25414 23.3871C9.25414 23.0949 9.24389 22.3207 9.23876 21.2953C5.81601 22.0377 5.09414 19.6444 5.09414 19.6444C4.53427 18.2243 3.72524 17.8449 3.72524 17.8449C2.61064 17.082 3.81137 17.0973 3.81137 17.0973C5.04697 17.1835 5.69604 18.3647 5.69604 18.3647C6.79321 20.2463 8.57636 19.7029 9.27978 19.3881C9.39052 18.5924 9.70736 18.0499 10.0591 17.7423C7.32641 17.4347 4.45429 16.3765 4.45429 11.6618C4.45429 10.3185 4.9311 9.22133 5.72065 8.36C5.58222 8.04931 5.16694 6.79833 5.82831 5.10337C5.82831 5.10337 6.85883 4.77319 9.2121 6.36459C10.1965 6.09082 11.2424 5.95546 12.2883 5.94931C13.3342 5.95546 14.3801 6.09082 15.3644 6.36459C17.7023 4.77319 18.7328 5.10337 18.7328 5.10337C19.3942 6.79833 18.9789 8.04931 18.8559 8.36C19.6403 9.22133 20.1171 10.3185 20.1171 11.6618C20.1171 16.3888 17.2409 17.4296 14.5031 17.7321C14.9338 18.1012 15.3337 18.8559 15.3337 20.0084C15.3337 21.6552 15.3183 22.978 15.3183 23.3779C15.3183 23.7009 15.5336 24.0854 16.1642 23.9623C21.0871 22.3484 24.6094 17.7341 24.6094 12.3047C24.6094 5.50942 19.0999 0 12.3047 0Z"
+              d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
             />
           </svg>
         </a>
-        <a
-          href="https://twitter.com/angular"
-          aria-label="Twitter"
-          target="_blank"
-          rel="noopener"
-        >
+        <a class="pill" href="https://angular.dev/tutorials" target="_blank" rel="noopener">
+          <span>Learn with Tutorials</span>
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            alt="Twitter"
+            height="14"
+            viewBox="0 -960 960 960"
+            width="14"
+            fill="currentColor"
           >
             <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+              d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
             />
           </svg>
         </a>
-        <a
-          href="https://www.youtube.com/channel/UCbn1OgGei-DV7aSRo_HaAiw"
-          aria-label="Youtube"
-          target="_blank"
-          rel="noopener"
-        >
+        <a class="pill" href="https://angular.dev/tools/cli" target="_blank" rel="noopener">
+          <span>CLI Docs</span>
           <svg
-            width="29"
-            height="20"
-            viewBox="0 0 29 20"
-            fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            alt="Youtube"
+            height="14"
+            viewBox="0 -960 960 960"
+            width="14"
+            fill="currentColor"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z"
+              d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"
             />
           </svg>
         </a>
@@ -310,4 +410,5 @@
     </div>
   </div>
 </main>
+
 <router-outlet />
